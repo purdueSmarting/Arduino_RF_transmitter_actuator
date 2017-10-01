@@ -30,18 +30,16 @@ void loop() {
     }
 }
  
- //메세지 송신 함수
-  void sendMessage(char* pinCode, char *data) {
-     if (strlen(data) > 0) {           //data(command)가 있다면
-
-      int msgSize = (strlen(data) + strlen(pinCode) + 1);  //송신 메세지의 전체 길이를 구하고
-      char packetData[msgSize];                            //구한 길이를 바탕으로 메세지 저장할 문자배열변수 선언
-      strcat(packetData, pinCode);                         //문자열 합치는 함수를 이용해 전송할 메세지 만듬
-      strcat(packetData, ".");
-      strcat(packetData, data);
- 
-      vw_send((uint8_t *)packetData, msgSize);             //메세지 전송
-      vw_wait_tx();                                        //메세지 전송 완료시 까지 기다림
-
+//메세지 송신 함수
+void sendMessage(char* pinCode, char *data) {
+    if (strlen(data) > 0) {           //data(command)가 있다면
+        int msgSize = (strlen(data) + strlen(pinCode) + 1);  //송신 메세지의 전체 길이를 구하고
+        char packetData[msgSize];                            //구한 길이를 바탕으로 메세지 저장할 문자배열변수 선언
+        strcat(packetData, pinCode);                         //문자열 합치는 함수를 이용해 전송할 메세지 만듬
+        strcat(packetData, ".");
+        strcat(packetData, data);
+        
+        vw_send((uint8_t *)packetData, msgSize);             //메세지 전송
+        vw_wait_tx();                                        //메세지 전송 완료시 까지 기다림
     }  
-  }
+}
